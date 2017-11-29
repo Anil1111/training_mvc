@@ -5,6 +5,7 @@ using Microsoft.Xrm.Sdk.Query;
 using Microsoft.Xrm.Tooling.Connector;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -23,11 +24,9 @@ namespace TrainingApp.CRM
         {
             // Connect to the CRM web service using a connection string.
 
-            //var builder = new ConfigurationBuilder()
-            //.SetBasePath(Directory.GetCurrentDirectory())
-            //.AddJsonFile("secrets.json");
+            var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("secrets.json");
 
-            //Configuration = builder.Build();
+            Configuration = builder.Build();
 
             //var credentials = new System.Net.NetworkCredential(Configuration["crmcreds:username"], Configuration["crmcreds:password"], Configuration["crmcreds:domain"]);
             //conn = new CrmServiceClient(credentials,
@@ -35,7 +34,8 @@ namespace TrainingApp.CRM
             //   "443",
             //   "workspace-justice-local-dev", useUniqueInstance: true, useSsl: true);
             //CrmServiceClient conn = new CrmServiceClient("acad_instruct@eperformanceinc.com", CrmServiceClient.MakeSecureString("Mayu6150"), String.Empty, "eperf-acad.crm.dynamics.com", useSsl:true, useUniqueInstance:false, isOffice365:true);
-            CrmServiceClient conn = new CrmServiceClient("Url = https://eperf-acad.crm.dynamics.com/; Username=acad_instruct@eperformanceinc.com; Password=Mayu6150; authtype=Office365");
+            //CrmServiceClient conn = new CrmServiceClient("Url = https://eperf-acad.crm.dynamics.com/; Username=acad_instruct@eperformanceinc.com; Password=Mayu6150; authtype=Office365");
+            CrmServiceClient conn = new CrmServiceClient("Url = https://eperf-acad.crm.dynamics.com/; Username= "+ Configuration["crmcreds:username"] + "; Password="+ Configuration["crmcreds:password"] + "; authtype=Office365");
             Console.WriteLine("Connection is ready????? " + conn.IsReady.ToString());
             _orgService = (IOrganizationService)conn.OrganizationWebProxyClient != null ? (IOrganizationService)conn.OrganizationWebProxyClient : (IOrganizationService)conn.OrganizationServiceProxy;
 
