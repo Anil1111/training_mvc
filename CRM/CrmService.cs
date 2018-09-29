@@ -28,19 +28,20 @@ namespace TrainingApp.CRM
 
             Configuration = builder.Build();
 
-            //var credentials = new System.Net.NetworkCredential(Configuration["crmcreds:username"], Configuration["crmcreds:password"], Configuration["crmcreds:domain"]);
-            //conn = new CrmServiceClient(credentials,
-            //   "workspace-justice-local-dev.crm.egcs.fmt-tgf.com",
-            //   "443",
-            //   "workspace-justice-local-dev", useUniqueInstance: true, useSsl: true);
-            //CrmServiceClient conn = new CrmServiceClient("acad_instruct@eperformanceinc.com", CrmServiceClient.MakeSecureString("Mayu6150"), String.Empty, "eperf-acad.crm.dynamics.com", useSsl:true, useUniqueInstance:false, isOffice365:true);
-            //CrmServiceClient conn = new CrmServiceClient("Url = https://eperf-acad.crm.dynamics.com/; Username=acad_instruct@eperformanceinc.com; Password=Mayu6150; authtype=Office365");
-            CrmServiceClient conn = new CrmServiceClient("Url = https://eperf-acad.crm.dynamics.com/; Username= "+ Configuration["crmcreds:username"] + "; Password="+ Configuration["crmcreds:password"] + "; authtype=Office365");
+             var credentials = new System.Net.NetworkCredential("eperformanceinc\\student1", "Eperformance01", "");
+            conn = new CrmServiceClient(credentials,
+               "stu16-01.crm.eperformanceinc.com",
+               "443",
+               "stu16-01", useUniqueInstance: true, useSsl: true);
+
+
+
+            //CrmServiceClient conn = new CrmServiceClient("Url = https://eperformanceinc1.crm.dynamics.com/; Username=fpearson@eperformanceinc.com; Password=Gaby614$; authtype=Office365");
+           
             Console.WriteLine("Connection is ready????? " + conn.IsReady.ToString());
             _orgService = (IOrganizationService)conn.OrganizationWebProxyClient != null ? (IOrganizationService)conn.OrganizationWebProxyClient : (IOrganizationService)conn.OrganizationServiceProxy;
 
 
-            // _orgService = (IOrganizationService)conn.OrganizationWebProxyClient != null ? (IOrganizationService)conn.OrganizationWebProxyClient : (IOrganizationService)conn.OrganizationServiceProxy;
 
             //Create any entity records this sample requires.
         }
